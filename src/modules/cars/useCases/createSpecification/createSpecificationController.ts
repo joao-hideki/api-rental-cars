@@ -3,10 +3,10 @@ import { CreateSpecificationUseCase } from './CreateSpecificationUseCase';
 import { container } from 'tsyringe';
 
 class CreateSpecificationController {
-  handle(req: Request, res: Response): Response {
+  async handle(req: Request, res: Response): Promise<Response> {
     const { name, description } = req.body;
     const createSpecificationUseCase = container.resolve(CreateSpecificationUseCase);
-    const createdSpecification = createSpecificationUseCase.execute({name, description});
+    const createdSpecification = await createSpecificationUseCase.execute({name, description});
 
     return res.status(201).json(createdSpecification);
   }
