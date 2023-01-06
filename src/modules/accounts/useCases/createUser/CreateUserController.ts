@@ -6,7 +6,6 @@ class CreateUserController {
   async handle(req: Request, res: Response): Promise<Response> {
     const {
       name,
-      username,
       email,
       password,
       driver_license
@@ -14,7 +13,6 @@ class CreateUserController {
     const createUserUseCase = container.resolve(CreateUserUseCase);
     const createdUser = await createUserUseCase.execute({
       name,
-      username,
       email,
       password,
       driver_license
