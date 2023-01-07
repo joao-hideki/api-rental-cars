@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response, request } from 'express';
 import { verify } from 'jsonwebtoken';
 import { UsersRepository } from '../modules/accounts/repositories/implementations/UsersRepository';
 import { AppError } from '../errors/AppError';
@@ -16,12 +16,15 @@ export async function ensureAuthenticated(req: Request, res: Response, next: Nex
 
   try {
     const { sub: user_id } = verify(token, '5f4dcc3b5aa765d61d8327deb882cf99') as IPayload;
-    next();
     const usersRepository = new UsersRepository();
-    const userAlreadyExists = usersRepository.findById(user_id);
-    if(!userAlreadyExists) {
+    const user = await usersRepository.findById(user_id);
+    if(!user) {
       throw new AppError('User does not exists!', 401);
     }
+    request.user = {
+      id: user_id
+    };
+    next();
   } catch {
     throw new AppError('Invalid token!', 401);
   }
