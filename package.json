@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "tsnd --transpile-only --ignore-watch node-modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "tsnd ./node_modules/typeorm/cli",
-    "test": "jest"
+    "test": "jest",
+    "seed:admin": "tsnd src/shared/infra/typeorm/seed/admin.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
