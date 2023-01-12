@@ -63,19 +63,9 @@ describe('List Cars', () => {
       category_id: 'testCategoryId',
       brand: 'Test Brand'
     });
-    const createdCar2 = await carsRepositoryInMemory.create({
-      name: '2',
-      description: '2',
-      daily_rate: 2,
-      license_plate: '2',
-      fine_amount: 2,
-      category_id: '2',
-      brand: '2'
-    });
     const availableCars = await listCarsUseCase.execute({
       category_id: createdCar.category_id
     });
-    console.log(createdCar2);
     expect(availableCars).toEqual([createdCar]);
   });
 });
