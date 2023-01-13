@@ -6,23 +6,27 @@ class CarsRepositoryInMemory implements ICarsRepository {
   cars: Car[] = [];
 
   async create({
+    id,
     name,
     description,
     daily_rate,
     fine_amount,
     license_plate,
     brand,
-    category_id
+    category_id,
+    specifications
   }: ICreateCarDTO): Promise<Car> {
     const createdCar = new Car();
     Object.assign(createdCar, {
+      id,
       name,
       description,
       daily_rate,
       fine_amount,
       license_plate,
       brand,
-      category_id
+      category_id,
+      specifications
     });
     this.cars.push(createdCar);
     return createdCar;
@@ -43,6 +47,9 @@ class CarsRepositoryInMemory implements ICarsRepository {
       return null;
     });
     return all;
+  }
+  async findById(car_id: string): Promise<Car> {
+    return this.cars.find((car) => car.id === car_id);
   }
 }
 

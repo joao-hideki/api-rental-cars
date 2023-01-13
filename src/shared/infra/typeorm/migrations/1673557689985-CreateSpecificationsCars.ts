@@ -8,8 +8,8 @@ export class CreateSpecificationsCars1673557689985 implements MigrationInterface
         name: 'specifications_cars',
         columns: [
           {name: 'car_id', type: 'uuid'},
-          {name: 'specification_id', type: 'uuid'},
-          {name: 'created_at', type: 'timestamp'}
+          {name: 'specifications_id', type: 'uuid'},
+          {name: 'created_at', type: 'timestamp', default: 'now()'}
         ]
       })
     );
@@ -19,7 +19,7 @@ export class CreateSpecificationsCars1673557689985 implements MigrationInterface
         name: 'FKSpecificationCar',
         referencedTableName: 'specifications',
         referencedColumnNames: ['id'],
-        columnNames: ['specification_id'],
+        columnNames: ['specifications_id'],
         onDelete: 'SET NULL',
         onUpdate: 'SET NULL'
       })

@@ -3,10 +3,12 @@ import { CreateCarController } from '../../../../modules/cars/useCases/createCar
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ListAvailableCarController } from '../../../../modules/cars/useCases/listAvailableCars/ListAvailableCarsController';
+import { CreateCarSpecificationController } from '../../../../modules/cars/useCases/createCarSpecification/CreateCarSpecificationController';
 
 const carsRoutes = Router();
 const createCarController = new CreateCarController();
 const listAvailableCarController = new ListAvailableCarController();
+const createCarSpecificationController = new CreateCarSpecificationController();
 
 carsRoutes.post(
   '/',
@@ -15,5 +17,11 @@ carsRoutes.post(
   createCarController.handle
 );
 carsRoutes.get('/available', listAvailableCarController.handle);
+carsRoutes.post(
+  '/specifications/:id',
+  ensureAuthenticated,
+  ensureAdmin,
+  createCarSpecificationController.handle
+);
 
 export {carsRoutes};
