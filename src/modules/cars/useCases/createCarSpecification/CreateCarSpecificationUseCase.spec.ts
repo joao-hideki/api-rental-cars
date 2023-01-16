@@ -37,8 +37,7 @@ describe('Create Car Specification', () => {
       specifications_id: [createdSpecification.id]
     });
 
-    const allCars = await carsRepositoryInMemory.listAvailable();
-    console.log(allCars);
+    await carsRepositoryInMemory.listAvailable();
 
     expect(car).toHaveProperty('specifications', [createdSpecification]);
   });

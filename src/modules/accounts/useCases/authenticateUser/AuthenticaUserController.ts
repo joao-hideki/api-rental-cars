@@ -7,7 +7,7 @@ class AuthenticaUserController {
     const {email, password} = req.body;
     const authenticateUserUseCase = container.resolve(AuthenticaUserUseCase);
     const token = await authenticateUserUseCase.execute({email, password});
-    return res.status(200).json(token);
+    return res.json(token);
   }
 }
 

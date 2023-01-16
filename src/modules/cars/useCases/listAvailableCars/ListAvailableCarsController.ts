@@ -11,7 +11,7 @@ class ListAvailableCarController {
       name: name as string,
       category_id: category_id as string
     });
-    return res.status(200).json(availableCars);
+    return res.json(availableCars);
   }
 }
 
